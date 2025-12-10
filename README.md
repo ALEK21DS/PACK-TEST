@@ -30,7 +30,9 @@ O en modo local (desarrollo):
 bash
 Copiar código
 pnpm link --global
-🧩 Uso Básico
+
+
+## 🧩 Uso Básico
 ts
 Copiar código
 import { OrionLogger, ConsoleTransport } from "@orion/logging";
@@ -56,7 +58,7 @@ Copiar código
   "context": {},
   "data": { "userId": 123 }
 }
-🧩 Uso de logger hijo (contexto)
+## 🧩 Uso de logger hijo (contexto)
 Ideal para requestId, correlationId, sessionId, etc.
 
 ts
@@ -65,7 +67,7 @@ const childLogger = logger.child({ requestId: "REQ-123" });
 
 childLogger.info("Inicio de transacción");
 childLogger.error("Error grave en el proceso");
-🧩 Niveles soportados
+## 🧩 Niveles soportados
 Nivel	Uso recomendado
 trace	Detalle muy profundo del flujo
 debug	Información de depuración
@@ -76,7 +78,7 @@ fatal	Fallas críticas del sistema
 audit	Acciones sensibles (crear/eliminar tarjetas)
 context	Logs relacionados a contexto
 
-📁 Estructura del proyecto
+## 📁 Estructura del proyecto
 pgsql
 Copiar código
 src/
@@ -90,7 +92,7 @@ src/
     console.ts
   utils/
     format.ts
-📌 Explicación de cada archivo
+## 📌 Explicación de cada archivo
 index.ts
 Punto de entrada del paquete. Define la API pública.
 
@@ -120,7 +122,7 @@ Transporte por defecto, imprime JSON a consola.
 utils/format.ts
 Funciones auxiliares de formateo y sanitización (placeholder de futura implementación).
 
-🛠 Crear un transporte personalizado
+## 🛠 Crear un transporte personalizado
 ts
 Copiar código
 import { LogTransport } from "@orion/logging";
@@ -134,7 +136,7 @@ export class FileTransport extends LogTransport {
 }
 
 const logger = new OrionLogger({ transport: new FileTransport() });
-☁️ Integración con CloudWatch (próxima fase)
+## ☁️ Integración con CloudWatch (próxima fase)
 El logger está preparado para soportar:
 
 Creación automática de log groups / streams
@@ -149,7 +151,7 @@ Se implementará en:
 
 transports/cloudwatch.ts
 
-🧪 Tests
+## 🧪 Tests
 Ejecuta:
 
 bash
@@ -157,8 +159,8 @@ Copiar código
 pnpm dev
 Esto correrá los tests dentro de tests/basic.test.ts.
 
-📌 Roadmap del proyecto
-✔ Fase 1 — Logger local (CONCLUIDA)
+##📌 Roadmap del proyecto
+# ✔ Fase 1 — Logger local (CONCLUIDA)
 
 JSON estructurado
 
@@ -168,7 +170,7 @@ Contexto
 
 Logger hijo
 
-⏳ Fase 2 — CloudWatch Transport
+#⏳ Fase 2 — CloudWatch Transport
 
 AWS SDK v3
 
@@ -178,10 +180,10 @@ sequenceTokens
 
 rate-limits
 
-⏳ Fase 3 — Data Sanitization
+#⏳ Fase 3 — Data Sanitization
 
 Masking automático
 
 Reglas configurables
 
-⏳ Fase 4 — Config centralizada (OrionConfig)
+#⏳ Fase 4 — Config centralizada (OrionConfig)
