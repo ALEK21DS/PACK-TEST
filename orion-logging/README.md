@@ -1,67 +1,66 @@
 # Orion Logging
 
-Pequeño wrapper de logging en TypeScript con niveles extendidos y soporte de transporte pluggable. Facilita el envío de eventos estructurados con metadatos de servicio, ambiente y contexto.
+Small logging wrapper in TypeScript with extended levels and pluggable transport support. Facilitates sending structured events with service, environment, and context metadata.
 
-## Características
-- Niveles: trace, debug, info, warn, error, fatal, audit, context.
-- Contexto heredable vía `logger.child(...)` para requestId u otros metadatos.
-- Transporte abstracto (`LogTransport`) para enviar a consola u otros destinos.
-- Transporte incluido: `ConsoleTransport` (salida JSON a stdout).
+## Features
+- Levels: trace, debug, info, warn, error, fatal, audit, context.
+- Inheritable context via `logger.child(...)` for requestId or other metadata.
+- Abstract transport (`LogTransport`) for sending to console or other destinations.
+- Included transport: `ConsoleTransport` (JSON output to stdout).
 
-## Requisitos
+## Requirements
 - Node.js >= 24
-- pnpm (recomendado) o npm/yarn compatibles con workspaces ESM.
+- pnpm (recommended) or npm/yarn compatible with ESM workspaces.
 
-## Instalación
+## Installation
 ```bash
 cd orion-logging
 pnpm install
-pnpm build   # opcional: genera dist/ para empaquetar
+pnpm build   # optional: generate dist/ for packaging
 ```
 
-Si quieres usarlo desde otro proyecto como paquete local:
+If you want to use it from another project as a local package:
 ```bash
 pnpm add ../orion-logging
 ```
 
-## Uso rápido
+## Quick usage
 ```ts
-import { OrionLogger } from "@orion/logging";
-import { ConsoleTransport } from "@orion/logging/transports/console";
+import { OrionLogger } from “@orion/logging”;
+import { ConsoleTransport } from “@orion/logging/transports/console”;
 
 const logger = new OrionLogger({
-  service: "cards-service",
-  environment: "dev",
-  context: { requestId: "REQ-99" },
+  service: “cards-service”,
+  environment: “dev”,
+  context: { requestId: “REQ-99” },
   transport: new ConsoleTransport(),
 });
 
-logger.info("Usuario creado", { userId: 123 });
-logger.error("Error simulado");
+logger.info(“User created”, { userId: 123 });
+logger.error(“Simulated error”);
 
-// Logger hijo con contexto extra
-const child = logger.child({ correlationId: "CORR-1" });
-child.audit("Auditoría de acción");
+// Child logger with extra context
+const child = logger.child({ correlationId: “CORR-1” });
+child.audit(“Action audit”);
 ```
 
-## API rápida
-- `new OrionLogger(options)` crea el logger. Opciones: `service`, `environment`, `context`, `transport`.
-- Métodos de nivel: `trace|debug|info|warn|error|fatal|audit|logContext(message, data?)`.
-- `child(extraContext)` retorna un logger que agrega contexto adicional.
-- `LogTransport` es la abstracción de transporte; `ConsoleTransport` es la implementación incluida.
 
-## Pruebas y ejemplos
-- Ejecuta el script de demostración/tests:
+## Quick API
+- `new OrionLogger(options)` creates the logger. Options: `service`, `environment`, `context`, `transport`.
+- Level methods: `trace|debug|info|warn|error|fatal|audit|logContext(message, data?)`.
+- `child(extraContext)` returns a logger that adds additional context.
+- `LogTransport` is the transport abstraction; `ConsoleTransport` is the included implementation.
+
+## Tests and examples
+- Run the demo/tests script:
 ```bash
-pnpm test      # corre tests con tsx --test
-pnpm dev       # ejecuta tests/basic.test.ts en modo ejemplo
+pnpm test      # runs tests with tsx --test
+pnpm dev       # runs tests/basic.test.ts in example mode
 ```
 
-La salida muestra los eventos JSON generados y cómo funciona `child`.
+The output shows the generated JSON events and how `child` works.
 
-## Desarrollo
+## Development
 - Lint: `pnpm lint`
-- Tipado: `pnpm build` (usa `tsc`)
-- Antes de publicar/empacar se ejecuta `pnpm build` vía `prepack`.
-
-
+- Typing: `pnpm build` (uses `tsc`)
+- Before publishing/packaging, `pnpm build` is run via `prepack`.
