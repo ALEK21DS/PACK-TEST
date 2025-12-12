@@ -3,8 +3,27 @@
   "version": "0.0.1",
   "private": true,
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "src/index.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    },
+    "./transports/console": {
+      "import": "./src/transports/console.ts",
+      "types": "./src/transports/console.ts"
+    },
+    "./transports/base": {
+      "import": "./src/transports/base.ts",
+      "types": "./src/transports/base.ts"
+    },
+    "./transports/cloudwatch": {
+      "import": "./src/transports/cloudwatch.ts",
+      "types": "./src/transports/cloudwatch.ts"
+    },
+    "./transports/*": "./src/transports/*.ts"
+  },
   "engines": {
     "node": ">=24"
   },

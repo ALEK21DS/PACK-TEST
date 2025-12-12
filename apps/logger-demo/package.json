@@ -1,0 +1,13 @@
+{
+  "name": "logger-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@orion/logging": "workspace:*"
+  }
+}
+
